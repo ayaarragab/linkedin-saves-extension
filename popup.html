@@ -241,15 +241,26 @@
       <p id="statusMessage"></p>
     </div>
 
-    <div id="categoriesListContainer" style="display: none;">
-      <h3>Categories</h3>
-      <ul id="categoriesList"></ul>
-    </div>
+  <label for="categorySearch">Search Category:</label>
+  <input type="text" id="categorySearch" placeholder="Search for a category..." oninput="searchCategory(this.value)" />
 
-    <div id="postsListContainer" style="display: none;">
-      <h3 id="categoryName"></h3>
-      <ul id="postsList"></ul>
-    </div>
+  <div id="categoriesListContainer" style="display: none;">
+    <h1>Categories</h1>
+    <ul id="categoriesList"></ul>
+  </div>
+
+  <button id="removeCategoryBtn" onclick="removeCategoryPrompt()">Remove Category</button>
+
+  <label for="postSearch">Search Post:</label>
+  <input type="text" id="postSearch" placeholder="Search for a post..." oninput="searchPost(this.value)" />
+
+  <div id="postsListContainer" style="display: none;">
+    <h1 id="categoryName"></h1>
+    <ul id="postsList"></ul>
+  </div>
+
+  <button id="removePostBtn" onclick="removePostPrompt()">Remove Post</button>
+
   </div>
   <script src="form_validation.js"></script>
   <script src="popup.js"></script>
