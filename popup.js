@@ -8,11 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoriesList = document.getElementById("categoriesList");
   const postsList = document.getElementById("postsList");
 
-  const searchCategoryBtn = document.getElementById("searchCategoryBtn");
-  const removeCategoryBtn = document.getElementById("removeCategoryBtn");
-  const searchPostBtn = document.getElementById("searchPostBtn");
-  const removePostBtn = document.getElementById("removePostBtn");
-
   // Show Add Post Form
   addPostBtn.addEventListener("click", () => {
     addPostForm.style.display = "block";
@@ -161,9 +156,3 @@ function removePostPrompt() {
   }
 }
 
-function removeCategoryPrompt() {
-  const categoryName = prompt("Enter the name of the category you want to remove:");
-  if (categoryName) {
-    removeCategory(categoryName);
-  }
-}
