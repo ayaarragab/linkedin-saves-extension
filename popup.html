@@ -1,10 +1,308 @@
-<link href="popup.css" rel="stylesheet" type="text/css" />
-<script type="module" src="popup.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Save LinkedIn Post</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+    .error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
 
-<div class="container">
-  <div>
-    <div class="title">Your bookmarks for this video</div>
+    .popup-container {
+      width: 300px;
+      height: 450px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
 
-    <div class="bookmarks" id="bookmarks"></div>
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 1em;
+      color: #fff;
+      background-color: #0073b1;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005582;
+    }
+
+    #statusMessage {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 0.9em;
+      color: green;
+    }
+
+    #categoriesList, #postsList {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    #categoriesList li, #postsList li {
+      margin-bottom: 10px;
+    }
+    #categoriesListContainer {
+  display: none;
+  padding: 30px;
+  background-color: #ffffff; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  margin: 30px auto;
+  max-width: 800px;
+  max-height: 300px; /* Set a maximum height for the posts container */
+  overflow-y: auto; 
+}
+
+#categoriesList {
+  list-style: none;
+  padding: 0;
+}
+
+#categoriesList li {
+  background-color: #f1f1f1; /* Light grey background */
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+#categoriesList li:hover {
+  background-color: #3fa5dc; /* Blue background on hover */
+  color: #ffffff;
+}
+
+#categoriesList li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+#categoriesList li .view-posts {
+  padding: 5px 15px;
+  background-color: #7fbbfa;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+#categoriesList li .view-posts:hover {
+  background-color: #3fa5dc;
+}
+
+/* Posts Container */
+#postsListContainer {
+  display: none;
+  padding: 30px;
+  background-color: #ffffff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  max-width: 800px;
+  max-height: 300px; /* Set a maximum height for the posts container */
+  overflow-y: auto; }
+
+#categoryName {
+  font-weight: 700;
+  color: #343a40;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Posts List */
+#postsList {
+  list-style: none;
+  padding: 0;
+}
+
+#postsList li {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+}
+
+#postsList li:hover {
+  background-color: #7fbbfa;
+  color: white;
+}
+
+#postsList li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+#postsList li .read-more {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#postsList li .read-more:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  #categoriesListContainer, #postsListContainer {
+    padding: 20px;
+    margin: 15px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  #categoriesList li, #postsList li {
+    padding: 15px;
+  }
+
+  #categoriesList li .view-posts, #postsList li .read-more {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <h1>Choose an Option</h1>
+    <button id="addPostBtn">Add Post</button>
+    <button id="viewCategoriesBtn">View Categories</button>
+
+    <div id="addPostForm" style="display: none;">
+      <h2>Save Post</h2>
+      <form id="savePostForm">
+        <label for="postLink">Post Link:</label>
+        <input type="url" id="postLink" required placeholder="Enter post link" />
+        <label for="remind">Write something to remind you of this post:</label>
+        <input type="text" id="remind" required placeholder="Enter something to remind you of this post" />
+        <label for="category">Category:</label>
+        <input type="text" id="category" required placeholder="Enter category" />
+        <button type="submit">Save</button>
+      </form>
+      <script>
+        document.getElementById('savePostForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent form submission for validation
+      
+          // Get the form elements
+          const postLink = document.getElementById('postLink');
+          const remind = document.getElementById('remind');
+          const category = document.getElementById('category');
+          
+          // Clear previous error messages
+          const errorMessages = document.querySelectorAll('.error-message');
+          errorMessages.forEach(message => message.remove());
+      
+          let valid = true;
+      
+          // Validate the post link
+          if (postLink.value.trim() === '') {
+            valid = false;
+            showError(postLink, 'Post link is required.');
+          }
+      
+          // Validate the reminder text
+          if (remind.value.trim() === '') {
+            valid = false;
+            showError(remind, 'Reminder text is required.');
+          }
+      
+          // Validate the category
+          if (category.value.trim() === '') {
+            valid = false;
+            showError(category, 'Category is required.');
+          }
+      
+          // If the form is valid, submit the form
+          if (valid) {
+            // You can add form submission logic here (e.g., saving the data)
+            alert('Post saved successfully!');
+          }
+        });
+      
+        // Function to show error messages
+        function showError(inputElement, message) {
+          const errorMessage = document.createElement('div');
+          errorMessage.classList.add('error-message');
+          errorMessage.style.color = 'red';
+          errorMessage.style.fontSize = '0.9em';
+          errorMessage.innerText = message;
+          
+          inputElement.parentElement.appendChild(errorMessage);
+        }
+      </script>      
+      <p id="statusMessage"></p>
+    </div>
+
+    <div id="categoriesListContainer" style="display: none;">
+      <h3>Categories</h3>
+      <ul id="categoriesList"></ul>
+    </div>
+
+    <div id="postsListContainer" style="display: none;">
+      <h3 id="categoryName"></h3>
+      <ul id="postsList"></ul>
+    </div>
   </div>
-</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
