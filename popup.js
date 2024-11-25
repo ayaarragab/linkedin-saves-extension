@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoriesList = document.getElementById("categoriesList");
   const postsList = document.getElementById("postsList");
 
+  const searchCategoryBtn = document.getElementById("searchCategoryBtn");
+  const removeCategoryBtn = document.getElementById("removeCategoryBtn");
+  const searchPostBtn = document.getElementById("searchPostBtn");
+  const removePostBtn = document.getElementById("removePostBtn");
+
   // Show Add Post Form
   addPostBtn.addEventListener("click", () => {
     addPostForm.style.display = "block";

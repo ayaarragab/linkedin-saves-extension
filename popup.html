@@ -5,139 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Save LinkedIn Post</title>
   <style>
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f7f7f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+    /* Add your existing styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-/* Popup container */
-#popupContainer {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 500px;
-  width: 100%;
-  box-sizing: border-box;
-}
+    /* Popup container */
+    #popupContainer {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-/* Title and Form */
-h1 {
-  text-align: center;
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+    /* Title and Form */
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
+    /* Button Container */
+    #buttonContainer {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-label {
-  font-weight: bold;
-  margin: 8px 0 5px;
-  font-size: 14px;
-  color: #555;
-}
+    /* List and search styles */
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-input[type="text"],
-input[type="url"] {
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-  width: 100%;
-}
+    li {
+      margin: 10px 0;
+    }
 
-input[type="text"]:focus,
-input[type="url"]:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
+    li a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 16px;
+      display: inline-block;
+      width: 100%;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
 
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    li a:hover {
+      background-color: #f0f0f0;
+    }
 
-button:hover {
-  background-color: #0056b3;
-}
+    /* Search box */
+    input[type="search"] {
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin-bottom: 15px;
+      width: 100%;
+      outline: none;
+    }
 
-/* Button Container */
-#buttonContainer {
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* List and search styles */
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-}
-
-li a {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 16px;
-  display: inline-block;
-  width: 100%;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-li a:hover {
-  background-color: #f0f0f0;
-}
-
-/* Search box */
-input[type="search"] {
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  margin-bottom: 15px;
-  width: 100%;
-  outline: none;
-}
-
-input[type="search"]:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Responsive Styles */
-@media (max-width: 600px) {
-  #popupContainer {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 20px;
-  }
-}
-
+    input[type="search"]:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
   </style>
 </head>
 <body>
@@ -146,6 +90,7 @@ input[type="search"]:focus {
     <button id="addPostBtn">Add Post</button>
     <button id="viewCategoriesBtn">View Categories</button>
 
+    <!-- Add Post Form -->
     <div id="addPostForm" style="display: none;">
       <h2>Save Post</h2>
       <form id="savePostForm">
@@ -160,28 +105,22 @@ input[type="search"]:focus {
       <p id="statusMessage"></p>
     </div>
 
-  <label for="categorySearch">Search Category:</label>
-  <input type="text" id="categorySearch" placeholder="Search for a category..." oninput="searchCategory(this.value)" />
+    <!-- Categories List -->
+    <div id="categoriesListContainer" style="display: none;">
+      <h2>Categories</h2>
+      <button id="searchCategoryBtn">Search Category</button>
+      <button id="removeCategoryBtn">Remove Category</button>
+      <ul id="categoriesList"></ul>
+    </div>
 
-  <div id="categoriesListContainer" style="display: none;">
-    <h1>Categories</h1>
-    <ul id="categoriesList"></ul>
+    <!-- Posts List for Selected Category -->
+    <div id="postsListContainer" style="display: none;">
+      <h2 id="categoryName"></h2>
+      <button id="searchPostBtn">Search Post</button>
+      <button id="removePostBtn">Remove Post</button>
+      <ul id="postsList"></ul>
+    </div>
   </div>
-
-  <button id="removeCategoryBtn" onclick="removeCategoryPrompt()">Remove Category</button>
-
-  <label for="postSearch">Search Post:</label>
-  <input type="text" id="postSearch" placeholder="Search for a post..." oninput="searchPost(this.value)" />
-
-  <div id="postsListContainer" style="display: none;">
-    <h1 id="categoryName"></h1>
-    <ul id="postsList"></ul>
-  </div>
-
-  <button id="removePostBtn" onclick="removePostPrompt()">Remove Post</button>
-
-  </div>
-  <script src="form_validation.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
