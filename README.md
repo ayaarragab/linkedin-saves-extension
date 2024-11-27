@@ -5,7 +5,6 @@
 ---
 
 ## 🌟 Features
-- **Search Posts:** Quickly find saved posts using keywords.
 - **Categorize Content:** Group saved posts into custom categories for better organization.
 - **Offline Access:** Data stored locally for faster performance.  
 ---
