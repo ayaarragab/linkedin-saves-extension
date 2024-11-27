@@ -3,21 +3,30 @@ import { saveToStorage, getFromStorage } from './storage.js';
 import { validateForm } from './formValidator.js';
 import { formFields } from './formFieldRules.js';
 
+const element = document.getElementById('statusMessage');
+const element2 = document.getElementById('category');
 
 const populateCategories = async () => {
   const result = await chrome.storage.local.get('savedPosts');
   const savedPosts = result.savedPosts || [];  
   const categories = [];
+
   savedPosts.forEach((post) => {
     categories.push(post.category);    
   })
+
   const select = document.querySelector('select');
+  const added = [];
   categories.forEach((category) => {
-    const option = document.createElement('option');
-    option.value = category;
-    option.text = category;
-    select.appendChild(option);
+    if (!added.includes(category)) {
+      const option = document.createElement('option');
+      option.value = category;
+      option.text = category;
+      added.push(option.value);
+      select.appendChild(option);
+    }
   })
+
   const finalElement = document.createElement('option');
   finalElement.value = 'Create a new category';
   finalElement.text = 'Create a new category';
@@ -36,13 +45,32 @@ const populateCategories = async () => {
 });
 }
 
+const isCategPopulated = () => {
+  const select = document.querySelector('select');
+  if (!select) {
+    return false;
+  }  
+  return select.options.length > 1;
+}
+
 const handleAddPostClick = async () => {
   hideAllButtonsExcept(['back', 'addPostForm']);
-  await populateCategories();
+  await verifyPopulate();
 }
-export {handleAddPostClick};
 
-export async function handleSavePostSubmit(event) {
+const verifyPopulate = async () => {
+  if (!isCategPopulated()) {
+    await populateCategories();
+  }
+}
+
+const refreshForm = async () => {
+  if (element.textContent.length !== 0) {
+    element.textContent = '';
+  }
+}
+
+export async function handleSavePostSubmit(event) {  
   event.preventDefault();
   const post = {
     postLink: document.getElementById('postLink').value,
@@ -54,13 +82,13 @@ export async function handleSavePostSubmit(event) {
     const savedPosts = await getFromStorage('savedPosts') || [];
     savedPosts.push(post);
     await saveToStorage('savedPosts', savedPosts);
-  
     document.getElementById('statusMessage').textContent = 'Post saved successfully!';
     document.getElementById('savePostForm').reset();
   }
 }
 
 export function loadPostsForCategory(category) {
+  refreshForm();
   hideAllButtonsExcept(['back', 'postsListContainer']);
   document.getElementById('categoryName').textContent = `${category}`;
 
@@ -88,5 +116,8 @@ export function loadPostsForCategory(category) {
 }
 
 export function handleBackClick() {
+  refreshForm();
   hideAllButtonsExcept(['addPostBtn', 'viewCategoriesBtn']);
-} 
+}
+
+export { refreshForm, handleAddPostClick };

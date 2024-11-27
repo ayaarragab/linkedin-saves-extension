@@ -1,13 +1,17 @@
 import { hideAllButtonsExcept } from './utils.js';
-import { getFromStorage, saveToStorage } from './storage.js';
+import { getFromStorage } from './storage.js';
 import { loadPostsForCategory } from './posts.js';
+import { refreshForm } from './posts.js';
+
 
 export function handleViewCategoriesClick() {
+  refreshForm();
   hideAllButtonsExcept(['back', 'categoriesListContainer', 'removeCategoryBtn', 'searchCategoriesBtn']);
   loadCategories();
 }
 
 export function loadCategories() {
+  refreshForm();
   getFromStorage('savedPosts').then((savedPosts) => {
     const categories = [...new Set(savedPosts.map((post) => post.category))];
     const categoriesList = document.getElementById('categoriesList');
