@@ -8,8 +8,6 @@
 - **Search Posts:** Quickly find saved posts using keywords.
 - **Categorize Content:** Group saved posts into custom categories for better organization.
 - **Offline Access:** Data stored locally for faster performance.  
-- **Sync Feature (Coming Soon):** Synchronize your saved posts across devices using your Google account.
-
 ---
 
 ## 🛠️ Tech Stack
@@ -35,10 +33,8 @@
     - Click on the LinkedIn Saves Extension icon in the Chrome toolbar.
     - Click "Add Post" to add the post to your saved list.
 
-    4. **View Categories:**
-        - Click on the LinkedIn Saves Extension icon in the Chrome toolbar.
-        - Navigate to the "View Categories" tab.
-        - Select a category to view all posts saved under that category.
-        - Use the search bar within the category to quickly find specific posts.
-
+4. **View Categories:**
+    - Click on the LinkedIn Saves Extension icon in the Chrome toolbar.
+    - Navigate to the "View Categories" tab.
+    - Select a category to view all posts saved under that category.
 ---
