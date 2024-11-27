@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Save LinkedIn Post</title>
   <link rel="stylesheet" href="/assets/css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="popup-container">
+  <div class="popup-container" style="display: flex; flex-direction: column; align-items: center;">
     <h1 style="text-align: center;" >LinkedIn<span style="color: #3487b4">Saves</span> </h1>
     <div class="buttons" style="display: flex; flex-direction: column; align-items: center;">
-      <h2>Please choose an option</h2>
-      <button class="homeBtn" id="addPostBtn">Save Post</button>
-      <button class="homeBtn" id="searchPostBtn">Search Post</button>
-      <button class="homeBtn" id="removePostBtn">Remove Post</button>    
-      <button class="homeBtn" id="viewCategoriesBtn">View Categories</button>
-      <button class="homeBtn" id="searchCategoriesBtn">Search Categories</button>
-      <button class="homeBtn" id="removeCategoryBtn">Remove Categories</button
+      <h2 style="text-align: center; font-size: 1rem; color: #424e54;">Take control of your LinkedIn saved posts with ease!</h2>
+      <button class="homeBtn" title="Save new post" id="addPostBtn">Save New Post</button>  
+      <button class="homeBtn" title="View My Posts" id="viewCategoriesBtn">View My Posts</button>
     </div>
 
     <div id="addPostForm" style="display: none;">
@@ -24,19 +21,21 @@
       <form id="savePostForm">
         <label for="postLink">Post Link:</label>
         <input type="url" id="postLink" required placeholder="Enter post link" />
-        <label for="remind">Write something to remind you of this post:</label>
-        <input type="text" id="remind" required placeholder="Enter something to remind you of this post" />
+        <label for="remind">Keywords:</label>
+        <input type="text" id="remind" required placeholder="Something to remind you of this post" />
         <label for="category">Category:</label>
-        <input type="text" id="category" required placeholder="Enter category" />
+        <select id="category" required>
+            <option value="" disabled selected>Select category</option>
+        </select>        
         <div style="display: flex; flex-direction: column; align-items: center;">
-          <button class="homeBtn" type="submit">Save</button>
+          <button class="homeBtn submit" title="Save your post" type="submit">Save</button>
         </div>
       </form>
       <p id="statusMessage"></p>
     </div>
 
     <div id="categoriesListContainer" style="display: none;">
-      <h3 style="text-align: center;">Categories</h3>
+      <h2 style="text-align: center;">Categories</h2>
       <ul id="categoriesList"></ul>
     </div>
 
@@ -44,13 +43,11 @@
       <h3 style="text-align: center;" id="categoryName"></h3>
       <ul id="postsList"></ul>
     </div>
-    <button class="homeBtn" id="back">Back</button>
+    <button class="homeBtn" aria-label="Back to the main menu" id="back"><i aria-label="Back to the main menu" title="Back to the main menu" class="fa-solid fa-backward"></i><span style="font-size: 0.9rem; margin-left: 4px;" >Back</span></button>
+    <p>&copy; 2024 LinkedInSaves. All rights reserved.</p>
   </div>
   <div id="app"></div>
   <script type="module" src="src/components/popup.js"></script>
   <script type="module" src="src/form_validation.js"></script>
-  <footer style="text-align: center; margin-top: 20px;">
-    <p>&copy; 2024 LinkedIn Saves. All rights reserved.</p>
-  </footer>
 </body>
 </html>

@@ -4,9 +4,43 @@ import { validateForm } from './formValidator.js';
 import { formFields } from './formFieldRules.js';
 
 
-export function handleAddPostClick() {
-  hideAllButtonsExcept(['back', 'addPostForm']);
+const populateCategories = async () => {
+  const result = await chrome.storage.local.get('savedPosts');
+  const savedPosts = result.savedPosts || [];  
+  const categories = [];
+  savedPosts.forEach((post) => {
+    categories.push(post.category);    
+  })
+  const select = document.querySelector('select');
+  categories.forEach((category) => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.text = category;
+    select.appendChild(option);
+  })
+  const finalElement = document.createElement('option');
+  finalElement.value = 'Create a new category';
+  finalElement.text = 'Create a new category';
+  select.appendChild(finalElement);
+  select.addEventListener('change', () => {
+    if (select.value === 'Create a new category') {
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.id = 'category';
+        newInput.placeholder = 'Create a new category';
+        newInput.required = true;
+
+        const parent = select.parentNode;
+        parent.replaceChild(newInput, select);
+    }
+});
 }
+
+const handleAddPostClick = async () => {
+  hideAllButtonsExcept(['back', 'addPostForm']);
+  await populateCategories();
+}
+export {handleAddPostClick};
 
 export async function handleSavePostSubmit(event) {
   event.preventDefault();
@@ -28,7 +62,7 @@ export async function handleSavePostSubmit(event) {
 
 export function loadPostsForCategory(category) {
   hideAllButtonsExcept(['back', 'postsListContainer']);
-  document.getElementById('categoryName').textContent = `Category: ${category}`;
+  document.getElementById('categoryName').textContent = `${category}`;
 
   getFromStorage('savedPosts').then((savedPosts) => {
     const filteredPosts = savedPosts.filter((post) => post.category === category);
