@@ -67,25 +67,40 @@ const refreshForm = async () => {
 
 export async function handleSavePostSubmit(event) {  
   event.preventDefault();
+
   const post = {
     postLink: document.getElementById('postLink').value,
     remind: document.getElementById('remind').value,
     category: document.getElementById('category').value,
   };
+
   const valid = validateForm(formFields);
+  const statusMsg = document.getElementById('statusMessage');
+  statusMsg.style.fontSize = 'larger';
   if (valid) {
     const savedPosts = await getFromStorage('savedPosts') || [];
     const categories = await getFromStorage('categories') || [];
+
+    const isDuplicate = savedPosts.some(post_ => post_.postLink === post.postLink);
+    if (isDuplicate) {
+      statusMsg.style.color = 'red';
+      statusMsg.textContent = 'You saved this post before!';
+      return;
+    }
+
     savedPosts.push(post);
     await saveToStorage('savedPosts', savedPosts);
+
     if (!categories.includes(post.category)) {
       categories.push(post.category);
       await saveToStorage('categories', categories);
     }
-    document.getElementById('statusMessage').textContent = 'Post saved successfully!';
+
+    statusMsg.textContent = 'Post saved successfully!';
     document.getElementById('savePostForm').reset();
   }
 }
+
 
 export function loadPostsForCategory(category) {
   refreshForm();
