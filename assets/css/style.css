@@ -97,6 +97,7 @@ button:hover {
   display: flex;
   align-items: center;
   flex-direction: row;
+  width: 100%;
 }
 #categoriesListContainer {
 display: none;
@@ -120,9 +121,13 @@ margin: 2px auto;
 max-width: 220px;
 max-height: 70%; /* Set a maximum height for the posts container */
 }
-#categoriesList {
+#categoriesList, #postsList {
+display: flex;
+flex-direction: column;
+align-items: center;
 list-style: none;
 padding: 0;
+margin: 1px auto;
 }
 
 #categoriesList li, #postsList li {
@@ -143,11 +148,13 @@ color: #ffffff;
 }
 
 #categoriesList li a {
+
 text-decoration: none;
 color: inherit;
 font-weight: 500;
 text-align: center;
 font-size: larger;
+width: 100%;
 }
 
 #categoriesList li .view-posts {

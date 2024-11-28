@@ -4,6 +4,7 @@ import { validateForm } from './formValidator.js';
 import { formFields } from './formFieldRules.js';
 import { handleViewCategoriesClick } from './categories.js';
 import { createRemoveBtns } from './categories.js';
+import { loadCategories } from './categories.js';
 
 const element = document.getElementById('statusMessage');
 
@@ -130,6 +131,7 @@ const removePost = async (postRemind) => {
 
 export function handleBackClick() {
   refreshForm();
+  loadCategories();
   if (document.getElementById('categoriesListContainer').style.display === 'block') {
     hideAllButtonsExcept(['addPostBtn', 'viewCategoriesBtn']);
   } else {

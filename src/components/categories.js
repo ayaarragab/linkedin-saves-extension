@@ -14,10 +14,11 @@ const loadCategories = async () => {
   const categories = await getFromStorage('categories') || [];  
   const categoriesList = document.getElementById('categoriesList');
   const categoryLen = categories.length;
+  const childrenLen = categoriesList.childNodes.length;
   if (categoryLen === 0) {
     categoriesList.textContent = 'No categories found.';
     return;
-  } else if (categoriesList.childNodes.length === 0 && categoryLen > 0) {
+  } else if (childrenLen === 0 && categoryLen > 0) {
     categories.forEach((category) => {
       const listItem = document.createElement('li');
       const link = document.createElement('a');
@@ -33,6 +34,21 @@ const loadCategories = async () => {
       listItem.appendChild(removeIcon);
       categoriesList.appendChild(listItem);
       }); 
+  } else if (childrenLen !== categoryLen && categoryLen - childrenLen === 1) {
+    const categoryMissed = categories[-1];
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = '#';
+    link.id = categoryMissed;
+    link.textContent = categoryMissed;
+    link.addEventListener('click', () => loadPostsForCategory(categoryMissed));
+    listItem.appendChild(link);
+    const removeIcon = createRemoveBtns('category');
+    removeIcon.addEventListener('click', async () => {
+      await removeCateogory(categoryMissed);
+    });
+    listItem.appendChild(removeIcon);
+    categoriesList.appendChild(listItem);
   }
 }
 
