@@ -38,3 +38,5 @@
     - Navigate to the "View Categories" tab.
     - Select a category to view all posts saved under that category.
 ---
+## Privacy Policy
+You can view our privacy policy [here](https://ayaarragab.github.io/linkedInsaves-privacy-policy/).

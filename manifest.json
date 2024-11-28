@@ -4,15 +4,8 @@
     "description": "A Chrome extension to organize LinkedIn saved posts into categories",
     "version": "1.0",
     "permissions": [
-      "tabs",
       "storage",
       "scripting"
-    ],
-    "content_scripts": [
-      {
-        "matches": ["https://*.linkedin.com/*"],
-        "js": ["content.js"]
-      }
     ],
     "action": {
       "default_popup": "popup.html"
