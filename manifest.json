@@ -18,9 +18,9 @@
       "default_popup": "popup.html"
     },
     "icons": {
-      "16": "assets/Danleech-Simple-Linkedin.16.png",
-      "48": "assets/Danleech-Simple-Linkedin.48.png",
-      "128": "assets/Danleech-Simple-Linkedin.128.png"
+      "16": "assets/linkedInSaves-16x16.png",
+      "48": "assets/linkedInSaves-48x48.png",
+      "128": "assets/linkedInSaves-128x128.png"
     }
   }
   

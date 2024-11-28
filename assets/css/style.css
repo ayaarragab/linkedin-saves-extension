@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -91,6 +94,9 @@ button:hover {
 
 #categoriesList li, #postsList li {
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 #categoriesListContainer {
 display: none;
@@ -119,17 +125,14 @@ list-style: none;
 padding: 0;
 }
 
-#categoriesList li {
+#categoriesList li, #postsList li {
 background-color: #f1f1f1; /* Light grey background */
 border-radius: 5px;
 padding: 10px;
 margin-bottom: 10px;
 display: flex;
-flex-direction: column;
 align-items: center;
 justify-content: space-between;
-
-align-items: center;
 transition: background-color 0.3s ease; /* Smooth hover transition */
 }
 
@@ -185,16 +188,6 @@ list-style: none;
 padding: 0;
 }
 
-#postsList li {
-background-color: #f1f1f1;
-border-radius: 5px;
-padding: 15px;
-margin-bottom: 15px;
-display: flex;
-flex-direction: column;
-transition: background-color 0.3s ease;
-}
-
 #postsList li:hover {
 background-color: #008ad5;
 color: white;
@@ -203,7 +196,6 @@ color: white;
 #postsList li a {
 text-decoration: none;
 color: inherit;
-font-weight: 600;
 margin-top: 10px;
 }
 
@@ -256,4 +248,14 @@ padding: 5px 10px;
 .submit {
   width: 88% !important;
   margin-bottom: 0 !important;
+}
+.fa-xmark:hover {
+  border: 1px solid whitesmoke;
+}
+.fa-xmark {
+  padding: 2px;
+  width: 10px;
+  height: 10px;
+  transition: border 2s;
+  padding-left: 3.4px;
 }

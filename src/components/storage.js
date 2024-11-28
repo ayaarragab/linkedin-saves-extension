@@ -9,7 +9,7 @@ export function saveToStorage(key, value) {
     });
   }
   
-  export function getFromStorage(key) {
+export function getFromStorage(key) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(key, (result) => {
         if (chrome.runtime.lastError) {
@@ -18,5 +18,5 @@ export function saveToStorage(key, value) {
         resolve(result[key]);
       });
     });
-  }
+}
   

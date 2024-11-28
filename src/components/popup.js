@@ -12,10 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const forms = {
     addPost: document.getElementById('savePostForm'),
   };
-
-  // Initialize button listeners
   setupButtonListeners(buttons);
-
-  // Initialize form submission listener
   forms.addPost.addEventListener('submit', handleSavePostSubmit);
 });

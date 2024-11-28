@@ -2,19 +2,13 @@ import { hideAllButtonsExcept } from './utils.js';
 import { saveToStorage, getFromStorage } from './storage.js';
 import { validateForm } from './formValidator.js';
 import { formFields } from './formFieldRules.js';
+import { handleViewCategoriesClick } from './categories.js';
+import { createRemoveBtns } from './categories.js';
 
 const element = document.getElementById('statusMessage');
-const element2 = document.getElementById('category');
 
 const populateCategories = async () => {
-  const result = await chrome.storage.local.get('savedPosts');
-  const savedPosts = result.savedPosts || [];  
-  const categories = [];
-
-  savedPosts.forEach((post) => {
-    categories.push(post.category);    
-  })
-
+  const categories = await getFromStorage('categories') || [];
   const select = document.querySelector('select');
   const added = [];
   categories.forEach((category) => {
@@ -80,8 +74,13 @@ export async function handleSavePostSubmit(event) {
   const valid = validateForm(formFields);
   if (valid) {
     const savedPosts = await getFromStorage('savedPosts') || [];
+    const categories = await getFromStorage('categories') || [];
     savedPosts.push(post);
     await saveToStorage('savedPosts', savedPosts);
+    if (!categories.includes(post.category)) {
+      categories.push(post.category);
+      await saveToStorage('categories', categories);
+    }
     document.getElementById('statusMessage').textContent = 'Post saved successfully!';
     document.getElementById('savePostForm').reset();
   }
@@ -107,17 +106,35 @@ export function loadPostsForCategory(category) {
       const listItem = document.createElement('li');
       const link = document.createElement('a');
       link.href = post.postLink;
+      link.id = post.remind;
       link.textContent = post.remind;
       link.target = '_blank';
+      const removeIcons = createRemoveBtns('post');
       listItem.appendChild(link);
+      removeIcons.addEventListener('click', async () => {
+        await removePost(post.remind);
+      });
+      listItem.appendChild(removeIcons);
       postsList.appendChild(listItem);
     });
   });
 }
 
+const removePost = async (postRemind) => {
+  const savedPosts = await getFromStorage('savedPosts') || [];
+  const updatedPosts = savedPosts.filter((post) => post.remind !== postRemind);
+  await saveToStorage('savedPosts', updatedPosts);
+  document.getElementById(postRemind).parentNode.style.display = "none";
+}
+
+
 export function handleBackClick() {
   refreshForm();
-  hideAllButtonsExcept(['addPostBtn', 'viewCategoriesBtn']);
+  if (document.getElementById('categoriesListContainer').style.display === 'block') {
+    hideAllButtonsExcept(['addPostBtn', 'viewCategoriesBtn']);
+  } else {
+    handleViewCategoriesClick();
+  }
 }
 
 export { refreshForm, handleAddPostClick };
