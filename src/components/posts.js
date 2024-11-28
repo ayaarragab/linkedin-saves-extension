@@ -147,7 +147,8 @@ const removePost = async (postRemind) => {
 export function handleBackClick() {
   refreshForm();
   loadCategories();
-  if (document.getElementById('categoriesListContainer').style.display === 'block') {
+  if (document.getElementById('categoriesListContainer').style.display === 'block' || 
+  document.getElementById('addPostForm').style.display === 'block') {
     hideAllButtonsExcept(['addPostBtn', 'viewCategoriesBtn']);
   } else {
     handleViewCategoriesClick();
