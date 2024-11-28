@@ -1,5 +1,7 @@
-# LinkedInSaves
-![LinkedIn Saves Extension Icon](assets/linkedInSaves-48x48.png)
+<div style="display: flex; align-items: center; gap: 10px;">
+  <img src="assets/linkedInSaves-48x48.png" alt="Logo" style="height: 40px; width: auto;">
+  <h1 style="margin: 0; font-size: 1.5rem;">LinkedInSaves</h1>
+</div>
 
 ---
 **LinkedIn Saves Extension** is a simple and efficient Chrome Extension that helps you organize, search, and categorize your LinkedIn saved posts for improved productivity and quick access. 🚀  
