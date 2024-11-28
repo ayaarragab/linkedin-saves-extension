@@ -129,6 +129,7 @@ padding: 0;
 background-color: #f1f1f1; /* Light grey background */
 border-radius: 5px;
 padding: 10px;
+width: 80%;
 margin-bottom: 10px;
 display: flex;
 align-items: center;
@@ -227,9 +228,6 @@ h1 {
 font-size: 1.75rem;
 }
 
-#categoriesList li, #postsList li {
-padding: 15px;
-}
 
 #categoriesList li .view-posts, #postsList li .read-more {
 font-size: 1rem;
