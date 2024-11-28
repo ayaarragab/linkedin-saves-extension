@@ -1,6 +1,6 @@
 <div style="display: flex; align-items: center; gap: 10px;">
   <img src="assets/linkedInSaves-48x48.png" alt="Logo" style="height: 40px; width: auto;">
-  <h1 style="margin: 0; font-size: 1.5rem;">LinkedInSaves</h1>
+  <h1  style="margin: 0; font-size: 1.5rem; display: inline">LinkedInSaves</h1>
 </div>
 
 ---
