@@ -147,7 +147,7 @@ background-color: #3fa5dc; /* Blue background on hover */
 color: #ffffff;
 }
 
-#categoriesList li a {
+#categoriesList li a, #postsList li a {
 
 text-decoration: none;
 color: inherit;
