@@ -1,13 +1,15 @@
 # LinkedInSaves
 
 ---
-**LinkedIn Saves Extension** is a simple and efficient Chrome Extension that helps you organize, search, and categorize your LinkedIn saved posts for improved productivity and quick access. 🚀  
+**LinkedIn Saves Extension** is a simple and efficient Chrome Extension that helps you organize and categorize your LinkedIn saved posts for improved productivity and quick access. 🚀  
 
 ---
 
 ## 🌟 Features
 - **Categorize Content:** Group saved posts into custom categories for better organization.
-- **Offline Access:** Data stored locally for faster performance.  
+- **Offline Access:** Data stored locally for faster performance.
+- **Web Store Link Coming Soon:** The extension will be available for direct installation from the Chrome Web Store very soon.
+
 ---
 
 ## 🛠️ Tech Stack
