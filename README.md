@@ -8,8 +8,6 @@
 ## 🌟 Features
 - **Categorize Content:** Group saved posts into custom categories for better organization.
 - **Offline Access:** Data stored locally for faster performance.
-- **Install from Web Store:** [here](https://chromewebstore.google.com/detail/linkedinsaves/mcoljndfagbflogbjekfblocgdgdnakc?hl=en&authuser=0).
-
 ---
 
 ## 🛠️ Tech Stack
@@ -26,16 +24,14 @@
     - Navigate to the cloned directory: `cd linkedin-saves-extension`
 
 2. **Install the Extension:**
-    - Open Chrome and go to `chrome://extensions/`.
-    - Enable "Developer mode" at the top right.
-    - Click on "Load unpacked" and select the extension folder.
+   -Install from Chrome web store: [here](https://chromewebstore.google.com/detail/linkedinsaves/mcoljndfagbflogbjekfblocgdgdnakc?hl=en&authuser=0).
 
-3. **Save Posts:**
+4. **Save Posts:**
     - Navigate to a LinkedIn post you want to save.
     - Click on the LinkedIn Saves Extension icon in the Chrome toolbar.
     - Click "Add Post" to add the post to your saved list.
 
-4. **View Categories:**
+5. **View Categories:**
     - Click on the LinkedIn Saves Extension icon in the Chrome toolbar.
     - Navigate to the "View Categories" tab.
     - Select a category to view all posts saved under that category.
