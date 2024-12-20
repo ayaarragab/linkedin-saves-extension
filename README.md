@@ -8,7 +8,7 @@
 ## 🌟 Features
 - **Categorize Content:** Group saved posts into custom categories for better organization.
 - **Offline Access:** Data stored locally for faster performance.
-- **Web Store Link Coming Soon:** The extension will be available for direct installation from the Chrome Web Store very soon.
+- **Install from Web Store:** [here](https://chromewebstore.google.com/detail/linkedinsaves/mcoljndfagbflogbjekfblocgdgdnakc?hl=en&authuser=0).
 
 ---
 
