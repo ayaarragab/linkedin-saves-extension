@@ -24,7 +24,7 @@
     - Navigate to the cloned directory: `cd linkedin-saves-extension`
 
 2. **Install the Extension:**
-   -Install from Chrome web store: [here](https://chromewebstore.google.com/detail/linkedinsaves/mcoljndfagbflogbjekfblocgdgdnakc?hl=en&authuser=0).
+   - Install from Chrome web store: [here](https://chromewebstore.google.com/detail/linkedinsaves/mcoljndfagbflogbjekfblocgdgdnakc?hl=en&authuser=0).
 
 4. **Save Posts:**
     - Navigate to a LinkedIn post you want to save.
