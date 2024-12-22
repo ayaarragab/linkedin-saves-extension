@@ -1,3 +1,7 @@
+import { loadCategories } from './categories.js';
+import { refreshForm } from './posts.js';
+import { handleViewCategoriesClick } from './categories.js';
+
 export function hideAllButtonsExcept(exceptions) {
   const allElements = [
     ...document.querySelectorAll(

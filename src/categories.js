@@ -85,7 +85,7 @@ export function handleViewCategoriesClick() {
   loadCategories();
 }
 
-const loadCategories = async () => {
+export const loadCategories = async () => {
   refreshForm();
   const categories = await getFromStorage('categories') || [];  
   const categoriesList = document.getElementById('categoriesList');
@@ -129,7 +129,7 @@ const loadCategories = async () => {
 }
 
 
-const removeCateogory = async (categoryName) => {
+export const removeCateogory = async (categoryName) => {
   const categories = await getFromStorage('categories') || [];
   const updatedCategories = categories.filter(category => !category.includes(categoryName));
   await saveToStorage('categories', updatedCategories);
@@ -142,4 +142,3 @@ const removeCateogory = async (categoryName) => {
 }
 
 
-export { createRemoveBtns, loadCategories };
