@@ -1,7 +1,83 @@
 import { hideAllButtonsExcept } from './utils.js';
 import { getFromStorage, saveToStorage } from './storage.js';
-import { loadPostsForCategory } from './posts.js';
-import { refreshForm } from './posts.js';
+import { refreshForm, removePost } from './posts.js';
+import { createRemoveBtns } from './buttons.js';
+
+
+export const populateCategories = async () => {
+  const categories = await getFromStorage('categories') || [];
+  const select = document.querySelector('select');
+  const added = [];
+  categories.forEach((category) => {
+    if (!added.includes(category)) {
+      const option = document.createElement('option');
+      option.value = category;
+      option.text = category;
+      added.push(option.value);
+      select.appendChild(option);
+    }
+  })
+
+  const finalElement = document.createElement('option');
+  finalElement.value = 'Create a new category';
+  finalElement.text = 'Create a new category';
+  select.appendChild(finalElement);
+  select.addEventListener('change', () => {
+    if (select.value === 'Create a new category') {
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.id = 'category';
+        newInput.placeholder = 'Create a new category';
+        newInput.required = true;
+
+        const parent = select.parentNode;
+        parent.replaceChild(newInput, select);
+    }
+});
+}
+
+export const isCategPopulated = () => {
+  const select = document.querySelector('select');
+  if (!select) {
+    return false;
+  }  
+  return select.options.length > 1;
+}
+
+export function loadPostsForCategory(category) {
+  refreshForm();
+  hideAllButtonsExcept(['back', 'postsListContainer']);
+  document.getElementById('categoryName').textContent = `${category}`;
+
+  getFromStorage('savedPosts').then((savedPosts) => {
+    const filteredPosts = savedPosts.filter((post) => post.category === category);
+    const postsList = document.getElementById('postsList');
+
+    postsList.innerHTML = '';
+
+    if (filteredPosts.length === 0) {
+      postsList.textContent = 'No posts found for this category.';
+      return;
+    }
+
+    filteredPosts.forEach((post) => {
+      const listItem = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = post.postLink;
+      link.id = post.remind;
+      link.textContent = post.remind;
+      link.target = '_blank';
+      const removeIcons = createRemoveBtns('post');
+      listItem.appendChild(link);
+      removeIcons.addEventListener('click', async () => {
+        await removePost(post.remind);
+      });
+      listItem.appendChild(removeIcons);
+      postsList.appendChild(listItem);
+    });
+  });
+}
+
 
 export function handleViewCategoriesClick() {
   refreshForm();
@@ -50,19 +126,6 @@ const loadCategories = async () => {
     listItem.appendChild(removeIcon);
     categoriesList.appendChild(listItem);
   }
-}
-
-const createRemoveBtns = (forWhat) => {
-  const icon = document.createElement('i');
-  icon.className = 'fa-solid fa-xmark';
-  icon.style.color = '#005582';
-  icon.style.cursor = 'pointer';
-  if (forWhat.includes('category')) {
-    icon.title = 'Delete this category';
-  } else {
-    icon.title = 'Delete this post';
-  }
-  return icon;
 }
 
 
